@@ -9,6 +9,7 @@ import auth from './modules/auth'
 import messages from './modules/messages'
 import products from './modules/products'
 import booking from './modules/booking'
+import admin from './modules/admin'
 
 Vue.use(Vuex)
 
@@ -17,7 +18,8 @@ export default new Vuex.Store({
     auth,
     messages,
     products,
-    booking
+    booking,
+    admin
   },
   actions: {
     signUserUp ({commit}, payload) {

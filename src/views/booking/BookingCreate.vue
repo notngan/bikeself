@@ -52,6 +52,9 @@ export default {
       return (new Date(this.booking.end.date).getTime() + this.getReHour * 3600000 + this.getReMin * 60000) / 86400000
     },
     dayNumber () {
+      if (!this.deGetTime || !this.reGetTime) {
+        return 1
+      }
       return this.countDay(this.deGetTime, this.reGetTime)
     },
     getDeHour () {

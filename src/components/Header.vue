@@ -106,7 +106,7 @@
    
         
         <!-- SUB MENU -->
-    <v-btn v-if="isSignedIn"  :to="'/bookings'" flat icon :color="'rgba(0,0,0,0.7)'">
+    <v-btn :to="'/bookings'" flat icon :color="'rgba(0,0,0,0.7)'">
       <v-badge
         color="red"
         overlap

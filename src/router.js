@@ -88,6 +88,12 @@ const router = new Router({
       component: () => import('./views/booking/CheckoutComfirm'),
       // props: true
     },
+    {
+      path: '/user/:id',
+      name: 'userProfile',
+      component: () => import('./views/UserProfile'),
+      // props: true
+    },
 
   ]
 })

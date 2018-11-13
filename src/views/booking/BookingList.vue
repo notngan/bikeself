@@ -1,17 +1,25 @@
 <template>
-  <div class="wrapper" v-if="isSignedIn">
-    <v-container fill-height v-if="bookings.length < 1">
-      <v-layout>
-        <h1>You've not booked any bike, please go to <router-link :to="'rentals'">Rentals</router-link> to book one!</h1>
-      </v-layout>
-    </v-container>
-    <booking-item 
-      v-for="(booking, index) in bookings" 
-      :key="index"
-      :index="index"
-      :booking="booking"
-      :start="booking.start"
-      :end="booking.end"/>
+  <div class="wrapper">
+    <v-container fill-height v-if="!isSignedIn">
+        <v-layout>
+          <h1>Please<a @click="openSignIn"> sign in </a>to continue!</h1>
+        </v-layout>
+      </v-container>
+    <div v-if="isSignedIn">
+      <v-container fill-height v-if="bookings.length < 1">
+        <v-layout>
+          <h1>You've not saved any bike, please go to <router-link :to="'rentals'">Rentals</router-link> to book one!</h1>
+        </v-layout>
+      </v-container>
+    
+      <booking-item 
+        v-for="(booking, index) in bookings" 
+        :key="index"
+        :index="index"
+        :booking="booking"
+        :start="booking.start"
+        :end="booking.end"/>
+    </div>
   </div>
 </template>
 
@@ -46,8 +54,13 @@ export default {
   },
 
   methods: {
-    ...mapActions(['displaySignIn', 'addMessage', 'loadBookingList'])
-  }
+    ...mapActions(['displaySignIn', 'addMessage', 'loadBookingList']),
+
+    openSignIn () {
+      this.displaySignIn(true)
+    }
+},
+
 }
 </script>
 
