@@ -69,7 +69,8 @@ export default {
     currentUser (val) {
       if (val) {
         if (val.isAdmin == true && this.isSignedIn) {
-        this.$router.push('/admin')
+          this.$store.commit('SET_ADMIN', true)
+          this.$router.push('/admin')
         } else {
           this.addMessage({
             class: 'error',
