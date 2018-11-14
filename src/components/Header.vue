@@ -63,10 +63,10 @@
   <v-toolbar
     class="primary"
     fixed
+    v-if="notAdmin"
     >
     <!-- SIDE ICON -->
     <v-toolbar-side-icon
-      v-if="notAdmin"
       @click.stop="sideNav = !sideNav"
       class="hidden-md-and-up">
     </v-toolbar-side-icon>
@@ -79,12 +79,11 @@
         <!-- LOGO -->
         <v-toolbar-items>
           <v-layout align-center wrap>
-            <router-link v-if="notAdmin"  :to="'/'"><img width="120px" src="../assets/img/logo.svg"></router-link>
-            <h1 v-if="!notAdmin" class="heading">Admin</h1>
+            <router-link :to="'/'"><img width="120px" src="../assets/img/logo.svg"></router-link>
             <v-divider 
               class="mx-3"
               inset
-              vertical v-if="!notAdmin"></v-divider>
+              vertical></v-divider>
           </v-layout>
         </v-toolbar-items>
         <v-spacer></v-spacer>
@@ -158,42 +157,20 @@
         </v-list-tile>
       </v-list>
     </v-menu>
-          
-        <!-- ADMIN MENU -->
-        <!-- <v-toolbar-items v-if="!notAdmin && adminIsAuthenticated">
-          <v-btn @click="showComfirm = true" flat>Log out &nbsp;<v-icon small>exit_to_app</v-icon></v-btn>
-          <v-dialog
-            v-model="showComfirm"
-            max-width="280"
-          >
-            <v-card>
-              <v-card-title class="subheading">Do you really want to log out?</v-card-title>
-              <v-divider></v-divider>
-              <v-card-actions>
-                <v-spacer></v-spacer>
-                <v-btn
-                  color="grey darken-2"
-                  flat
-                  @click="showComfirm = false"
-                >
-                  No, thanks
-                </v-btn>
-
-                <v-btn
-                  color="error"
-                  flat
-                  @click="logAdminOut"
-                >
-                  Log out
-                </v-btn>
-              </v-card-actions>
-            </v-card>
-          </v-dialog>
-        </v-toolbar-items> -->
-
        
   </v-toolbar>
   
+  <v-toolbar fixed v-if="!notAdmin" class="primary">
+    <v-btn flat icon :to="'/'"><v-icon>home</v-icon></v-btn>
+    
+    <v-toolbar-title>Admin</v-toolbar-title>
+    
+    
+    <v-spacer></v-spacer>
+    <v-toolbar-items v-if="isAdmin == true">
+      <v-btn flat @click="signout">Sign out <v-icon>exit_to_app</v-icon></v-btn>
+    </v-toolbar-items>
+  </v-toolbar>
 </div>
 </template>
 
@@ -226,7 +203,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['isSignedIn', 'signedInUser', 'showSignIn', 'showSignUp', 'showComfirm', 'bookings']),
+    ...mapGetters(['isAdmin','isSignedIn', 'signedInUser', 'showSignIn', 'showSignUp', 'showComfirm', 'bookings']),
     showSignInLocal: {
       get () {
         return this.showSignIn
@@ -254,9 +231,6 @@ export default {
     notAdmin () {
       return this.$route.name !== 'admin' && this.$route.name !== 'adminLogin'
     },
-    adminIsAuthenticated () {
-      return this.$store.getters.adminIsAuthenticated 
-    },
     showBadge () {
       if (this.bookings.length > 0) {
         return true
@@ -268,9 +242,8 @@ export default {
   methods: {
     ...mapActions(['signUserOut', 'displaySignIn', 'displaySignUp', 'displayComfirm']),
 
-    onSignOut () {
+    signout () {
       this.signUserOut()
-      this.closeComfirm()
     }, 
     closeComfirm () {
       this.displayComfirm(false)

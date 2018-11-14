@@ -1,5 +1,5 @@
 <template>
-<v-container my-0 py-0 fluid fill-height>
+<v-container v-if="isSignedIn" my-0 py-0 fluid fill-height>
   <v-layout column justify-center>
     <v-toolbar flat color="white">
       <v-toolbar-title>All Items</v-toolbar-title>
@@ -83,7 +83,7 @@
 
 <script>
 import AdminForm from './AdminForm.vue'
-
+import { mapGetters, mapActions } from 'vuex'
 export default {
   components: { AdminForm },
   data () {
@@ -112,19 +112,20 @@ export default {
         { price: 0 },
         { imageUrl: '' },
         { description: '' },
-      ]
+      ], 
     }
   },
   computed: {
+    ...mapGetters(['isSignedIn', 'currentUser']),
     allBikes () {
-      return this.$store.state.allBikes
+      return this.$store.getters.products
     },
     formTitle () {
       return this.editedIndex === -1 ? 'New Item' : 'Edit Item'
     },
-    adminIsAuthenticated () {
-      return this.$store.getters.adminIsAuthenticated 
-    }
+    // currentUser () {
+    //   return this.userById(this.signedInUser.id)
+    // }
   },
   watch: {
     newDialog (val) {
@@ -133,13 +134,23 @@ export default {
     editDialog (val) {
       val || this.close()
     },
-    adminIsAuthenticated (val) {
+    isSignedIn (val) {
       if (!val) {
-        this.$router.push('/admin/signin')
+        this.$router.push('/admin/login')
+      }
+    },
+    currentUser (val) {
+      if(val.isAdmin == false) {
+        this.$router.push('/admin/login')
+        this.addMessage({
+          class: 'error',
+          message: 'Please sign in with admin account!'
+        })
       }
     }
   },
   methods: {
+    ...mapActions(['signUserOut', 'addMessage']),
     close () {
       this.deleteDialog = false 
       this.newDialog = false 
@@ -188,4 +199,4 @@ export default {
     }
   }
 }
-</script>
+</script> 

@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home'
 import store from './store/store' 
+//import { firebaseAuth } from './firebaseConfig'
 
 Vue.use(Router)
 
@@ -50,7 +51,8 @@ const router = new Router({
       name: 'admin',
       component: () => import('./views/admin/Index'),
       meta: {
-        requiresAuth: true
+        requiresAuth: true,
+        adminAuth: true
       }
     },
     {
@@ -99,13 +101,15 @@ const router = new Router({
 })
 
 router.beforeEach((to, from, next) => {
-  if(to.matched.some(record => record.meta.requiresAuth)) {
-    if(!store.state.admin) {
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    if (store.getters.isSignedIn == false) {
       next({
         path: '/admin/login',
         query: { redirect: to.fullPath }
       })
-    } else { next () }
+    } else {
+      next ()
+    }
   } else { next() }
 })
 export default router

@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
 import { database, firebaseAuth } from '../firebaseConfig';
-
+//import router from '../router'
 
 
 import auth from './modules/auth'
@@ -72,11 +72,42 @@ export default new Vuex.Store({
         commit('ADD_MESSAGE', error)
       })
     },
+    
+    logAdminIn({commit}, payload) {
+      firebaseAuth().signInWithEmailAndPassword(payload.email, payload.password).then(() => {
+        commit('SET_ADMIN', true)
+        //router.push('/admin')
+      }).catch( error => {
+        console.log(error)
+      })
+    },
 
     signUserOut () {
       firebaseAuth().signOut().then(() => {
         console.log('signed out')
       })
+    },
+
+    loadUserList ({commit}) {
+      database.ref('users').once('value').then((data) => {
+        const users = []
+        const obj = data.val()
+
+        for (let key in obj) {
+          users.push({
+            id: key, 
+            name: obj[key].name,
+            email: obj[key].email,
+            isAdmin: obj[key].isAdmin
+          })
+        }
+
+        commit('LOAD_USER_LIST', users)
+      //  console.log(users)
+      }).catch((error) => {
+        console.log(error)
+      })
+
     },
     
     loadProductList ({commit}) {

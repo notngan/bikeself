@@ -12,30 +12,23 @@
 
               <form @submit.prevent="onLogIn">
                 <v-card-text>
-                  <p class="caption error--text">{{ error }}</p>
-                    <v-layout column>
-                      <v-flex>
-                        <v-text-field
-                          name="email"
-                          id="email"
-                          label="Email"
-                          v-model="email"
-                          type="email"
-                          required
-                          ></v-text-field>
-                      </v-flex>
+                  <v-layout column>
+                    <v-text-field
+                      name="email"
+                      label="Email"
+                      v-model="email"
+                      type="email"
+                      required
+                      ></v-text-field>
 
-                      <v-flex>
-                        <v-text-field
-                          name="password"
-                          id="password"
-                          label="Password"
-                          v-model="password"
-                          type="password"
-                          required
-                          ></v-text-field>
-                      </v-flex>
-                    </v-layout>
+                    <v-text-field
+                      name="password"
+                      label="Password"
+                      v-model="password"
+                      type="password"
+                      required
+                      ></v-text-field>
+                  </v-layout>
                 </v-card-text>
 
                 <v-card-actions>
@@ -52,35 +45,63 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex'
 export default {
   data () {
     return {
-      email: '',
-      password: ''
+      email: null,
+      password: null,
+      user: {}
+
     }
   }, 
   computed: {
-    admin () {
-      return this.$store.getters.admin 
-    },
-    error () {
-      return this.$store.getters.error
-    },
-    adminIsAuthenticated () {
-      return this.$store.getters.adminIsAuthenticated 
-    }
+    ...mapGetters(['currentUser', 'isSignedIn', 'userByEmail']),
+
+    // user () {
+    //   return this.userByEmail(this.email)
+    // }
+    // user () {
+    //   return this.userById(this.id)
+    // }
   },
   watch: {
-    adminIsAuthenticated (val) {
+    currentUser (val) {
       if (val) {
+        if (val.isAdmin == true && this.isSignedIn) {
         this.$router.push('/admin')
+        } else {
+          this.addMessage({
+            class: 'error',
+            message: 'Please sign in with admin account!'
+          })
+        }
       }
     }
-   },
-   methods: {
-     onLogIn () {
-       this.$store.dispatch('logAdminIn', {email: this.email, password: this.password})
-     }
-   }
- }
+  },
+
+  mounted () {
+  
+  },
+
+  methods: {
+    ...mapActions(['signUserOut','addMessage','logAdminIn']),
+    onLogIn () {
+      this.user = this.userByEmail(this.email)
+      if (this.user.isAdmin == false) {
+        this.addMessage({
+          class: 'error',
+          message: 'Please sign in with admin account!'
+        })
+        return 
+      } else {
+        this.logAdminIn({
+          email: this.email, 
+          password: this.password,
+        })
+      }
+    },
+    
+  }
+}
 </script>
