@@ -22,6 +22,7 @@ export default new Vuex.Store({
     admin
   },
   actions: {
+    // AUTH
     signUserUp ({commit}, payload) {
       
       // create user
@@ -29,7 +30,7 @@ export default new Vuex.Store({
       .then(data => {
         
         // save to database
-        database.ref('/users' ).child(data.user.uid).set({
+        database.ref('users' ).child(data.user.uid).set({
           name: payload.name, 
           email: payload.email,
           isAdmin: false
@@ -62,7 +63,6 @@ export default new Vuex.Store({
         console.log(error)
       })
     },
-
     signUserIn ({commit}, payload) {
       firebaseAuth().signInWithEmailAndPassword(payload.email, payload.password)
       .then(data => {
@@ -72,7 +72,6 @@ export default new Vuex.Store({
         commit('ADD_MESSAGE', error)
       })
     },
-    
     logAdminIn({commit}, payload) {
       firebaseAuth().signInWithEmailAndPassword(payload.email, payload.password).then(() => {
         commit('SET_ADMIN', true)
@@ -81,13 +80,11 @@ export default new Vuex.Store({
         console.log(error)
       })
     },
-
     signUserOut () {
       firebaseAuth().signOut().then(() => {
         console.log('signed out')
       })
     },
-
     loadUserList ({commit}) {
       database.ref('users').once('value').then((data) => {
         const users = []
@@ -109,7 +106,17 @@ export default new Vuex.Store({
       })
 
     },
+    displaySignIn ({commit}, payload) {
+      commit('DISPLAY_SIGN_IN', payload)
+    },
+    displaySignUp ({commit}, payload) {
+      commit('DISPLAY_SIGN_UP', payload)
+    },
+    displayComfirm ({commit}, payload) {
+      commit('DISPLAY_COMFIRM', payload)
+    },
     
+    // PRODUCT
     loadProductList ({commit}) {
       database.ref('bikes').once('value').then((data) => {
         const bikes = []
@@ -117,6 +124,7 @@ export default new Vuex.Store({
         for (let key in obj) {
           bikes.push({
             id: key,
+            quantity: obj[key].quantity,
             show: obj[key].show,
             title: obj[key].title,
             price: obj[key].price,
@@ -133,16 +141,33 @@ export default new Vuex.Store({
       })
     },
 
-    displaySignIn ({commit}, payload) {
-      commit('DISPLAY_SIGN_IN', payload)
-    },
-    displaySignUp ({commit}, payload) {
-      commit('DISPLAY_SIGN_UP', payload)
-    },
-    displayComfirm ({commit}, payload) {
-      commit('DISPLAY_COMFIRM', payload)
+    //ADMIN
+    createBike ({commit}, payload) {
+      database.ref('bikes').child(payload.index).set(payload.bike)
+      .then(() => {
+        commit('SET_CREATED_BIKE', {
+          ...payload.bike,
+          id: payload.index
+        })
+        console.log(payload.bike)
+      }).catch((error) => {
+        console.log(error)
+      })
     },
 
+    editBike({commit}, payload) {
+      database.ref('bikes').child(payload.id).update(payload.bike).then(() => {
+        commit('SET_UPDATED_BIKE', {
+          ...payload.bike, 
+          id: payload.id
+        })
+        console.log(payload.bike)
+      }).catch(error => {
+        console.log(error)
+      })
+    },
+
+    //BOOKINGS
     loadCountryList ({commit}) {
       axios.get('https://restcountries.eu/rest/v1/all')
       .then(response => {
@@ -153,7 +178,6 @@ export default new Vuex.Store({
         console.log(error);
       })
     },
-
     saveToBookings ({commit}, payload) {
       database.ref('bookings/' + payload.uid).push(payload.booking).then((data) => {
         const key = data.key
@@ -166,7 +190,6 @@ export default new Vuex.Store({
         console.log(error)
       })
     },
-
     loadBookingList ({commit}, uid) {
       database.ref('bookings/' + uid).once('value').then((data) => {
         const bookings = []
@@ -187,7 +210,6 @@ export default new Vuex.Store({
         console.log(error)
       })
     },
-
     removeBooking({commit}, payload) {
       database.ref('bookings/' + payload.uid).child(payload.id).remove().then(() => {
         commit('REMOVE_BOOKING', payload)
@@ -196,7 +218,6 @@ export default new Vuex.Store({
         console.log(error)
       })
     },
-
     updateBooking ({commit}, payload) {
       database.ref(`bookings/${payload.uid}`).child(payload.booking.id).update(payload.booking).then(() => {
         commit('UPDATE_BOOKING', payload.booking)
@@ -206,6 +227,7 @@ export default new Vuex.Store({
       })
     },
 
+    // TRANSACTION
     saveToTransactions ({commit}, payload) {
       const transaction = {
         booking: payload.booking,
@@ -222,7 +244,6 @@ export default new Vuex.Store({
         console.log(error)
       })
     },
-
     loadTransactionList ({commit}, uid) {
       database.ref(`transactions/${uid}`).once('value').then((data) => {
         const transactions = []
@@ -318,26 +339,7 @@ export default new Vuex.Store({
   //         console.log(error)
   //       })
   //   },
-  //   createBike ({commit}, payload) {
-  //     const bike = {
-  //       show: payload.show,
-  //       title: payload.title,
-  //       price: payload.price,
-  //       imageUrl: payload.imageUrl,
-  //       description: payload.description
-  //     }
-  //     firebase.database().ref('bikes').push(bike)
-  //     .then((data) => {
-  //       const key = data.key
-  //       commit('setCreatedBike', {
-  //         ...bike,
-  //         id: key
-  //       })
-  //       console.log(bike)
-  //     }).catch((error) => {
-  //       console.log(error)
-  //     })
-  //   },
+
   //   editBike ({commit}, payload) {
   //     const editObj = {}
   //     if(payload.title) {

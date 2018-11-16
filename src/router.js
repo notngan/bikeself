@@ -97,7 +97,12 @@ const router = new Router({
       // props: true
     },
 
-  ]
+  ],
+
+  scrollBehavior () {
+    return { x: 0, y: 0}
+  }
+
 })
 
 router.beforeEach((to, from, next) => {
@@ -112,4 +117,5 @@ router.beforeEach((to, from, next) => {
     }
   } else { next() }
 })
+
 export default router

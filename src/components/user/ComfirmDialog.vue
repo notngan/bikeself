@@ -22,15 +22,15 @@
   </v-dialog>
 </template>
 
-<script>
+<script> 
 export default {
   props: ['name', 'showComfirm'],
   methods: {
     comfirm () {
-      this.$emit('comfirm', this.showComfirm)
+      this.$emit('comfirm')
     },
     close () {
-      this.$emit('close', this.showComfirm)
+      this.$emit('close')
     }
   }
 }

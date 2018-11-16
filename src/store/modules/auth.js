@@ -5,7 +5,7 @@ const state = {
   user: firebaseAuth().currentUser,
   showSignIn: false,
   showSignUp: false,
-  showComfirm: false,
+  comfirm: false,
   countryList: []
 }
 
@@ -21,7 +21,7 @@ const mutations = {
     state.showSignUp = payload
   },
   'DISPLAY_COMFIRM' (state, payload) {
-    state.showComfirm = payload
+    state.comfirm = payload
   },
   'LOAD_COUNTRY_LIST' (state, payload) {
     state.countryList = payload
@@ -40,7 +40,7 @@ const getters = {
     return state.showSignUp
   },
   showComfirm: (state) => {
-    return state.showComfirm
+    return state.comfirm
   },
   isSignedIn: (state) => {
     return state.isSignedIn

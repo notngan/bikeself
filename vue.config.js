@@ -1,4 +1,3 @@
-// // vue.config.js
-// module.exports = {
-//   baseUrl: '/bikeself/'
-//  } 
+module.exports = {
+  baseUrl: '/'
+}

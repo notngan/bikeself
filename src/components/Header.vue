@@ -45,7 +45,8 @@
           <v-list-tile-content>View profile</v-list-tile-content>
           <v-list-tile-action><v-icon>info</v-icon></v-list-tile-action>
         </v-list-tile>
-
+        
+        <!-- SIGN OUT -->
         <v-divider></v-divider>
         <v-list-tile @click="openComfirm">
           <v-list-tile-content>Sign out</v-list-tile-content>
@@ -54,7 +55,7 @@
             :name="'sign out'"
             :show-comfirm="showComfirmLocal"
             @close="closeComfirm"
-            @comfirm="onSignOut"/>
+            @comfirm="signout"/>
         </v-list-tile>
       </template>
     </v-list>
@@ -135,7 +136,7 @@
             :name="'sign out'"
             :show-comfirm="showComfirmLocal"
             @close="closeComfirm"
-            @comfirm="onSignOut"/>
+            @comfirm="signout"/>
         </v-list-tile>
 
         <!-- SIGN IN  -->

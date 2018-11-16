@@ -1,22 +1,20 @@
 <template>
 <v-container v-if="isSignedIn" my-0 py-0 fluid fill-height>
   <v-layout column justify-center>
-    <v-toolbar flat color="white">
+    <v-toolbar flat>
       <v-toolbar-title>All Items</v-toolbar-title>
 
       <v-spacer></v-spacer>
 
+      <!-- ADD NEW -->
       <v-dialog persistent v-model="newDialog" max-width="600px">
-        <v-btn slot="activator" dark class="mb-2"><v-icon small>add</v-icon> &nbsp; New Item</v-btn>
+        <v-btn slot="activator" dark class="mb-2"><v-icon small>add</v-icon> &nbsp; Add New Bike</v-btn>
         <v-card>
-          <v-container>
-            <admin-form
-            :form-title="formTitle"
-            @close="close"
-            @save-bike="createBike"
-            :model="editedItem"
-            :is-editing="false"/>
-          </v-container>
+          <admin-form
+          @close="close"
+          @save-bike="createBikeLocal"
+          :model="editedItem"
+          :is-editing="false"/>
         </v-card>
       </v-dialog>
     </v-toolbar>
@@ -24,37 +22,34 @@
     <v-data-table
     :headers="headers"
     expand
-    :items="allBikes"
-    :item-key="allBikes.id"
+    :items="products"
+    :item-key="products.id"
     >
       <template v-if="props.item.show == true" slot="items" slot-scope="props">
         <td>{{ props.item.id }}</td>
         <td class="text-capitalize">{{ props.item.title }}</td>
         <td>{{ props.item.price }}</td>
-        <td>{{ props.item.view }}</td>
+        <td>{{ props.item.quantity }}</td>
         <td><v-img :src="props.item.imageUrl"></v-img></td>
         <td>{{ props.item.description }}</td>
         <td>
           <v-layout justify-space-around>
             <v-flex>
-              <v-dialog v-model="editDialog" max-width="600px">
+              <v-dialog v-model="editDialog" max-width="700px">
                 <v-icon @click="openEditDialog(props.item)" slot="activator" small>edit</v-icon>
                 <v-card>
-                  <v-container>
-                    <admin-form
-                    :form-title="formTitle"
-                    @close="close"
-                    @save-bike="editBike"
-                    :model="editedItem"
-                    :is-editing="true"/>
-                  </v-container>
+                  <admin-form
+                  @close="close"
+                  @save-bike="editBikeLocal"
+                  :model="editedItem"
+                  :is-editing="true"/>
                 </v-card>
               </v-dialog>
             </v-flex>
 
             <v-flex>
-              <v-dialog v-model="deleteDialog" max-width="600px">
-                <v-icon @click="deleteDialog=true" slot="activator" small>delete</v-icon>
+              <v-dialog v-model="deleteDialog" max-width="700px">
+                <v-icon @click="deleteDialog = true" slot="activator" small>delete</v-icon>
                 <v-card>
 
                   <v-container>
@@ -95,34 +90,30 @@ export default {
         { text: 'ID', value: 'id', sortable: false },
         { text: 'Title', sortable: false, value: 'title' },
         { text: 'Price($)', value: 'price' },
-        { text: 'View(s)', value: 'view' },
+        { text: 'Quantity', value: 'quantity' },
         { text: 'Image', value: 'imageUrl', sortable: false },
         { text: 'Description', value: 'description', sortable: false },
         { text: 'Actions', sortable: false }
       ],
       editedIndex: -1,
-      defaultItem: [
-        { title: '' },
-        { price: 0 },  
-        { imageUrl: '' },
-        { description: '' },
-      ],
-      editedItem: [
-        { title: '' },
-        { price: 0 },
-        { imageUrl: '' },
-        { description: '' },
-      ], 
+      defaultItem:{
+        title: '',
+        price: 0,
+        quantity: 0,
+        imageUrl: '',
+        description: '',
+      },
+      editedItem: {
+        title: '',
+        quantity: 0,
+        price: 0,
+        imageUrl: '',
+        description: '',
+      }    
     }
   },
   computed: {
-    ...mapGetters(['isSignedIn', 'currentUser']),
-    allBikes () {
-      return this.$store.getters.products
-    },
-    formTitle () {
-      return this.editedIndex === -1 ? 'New Item' : 'Edit Item'
-    },
+    ...mapGetters(['isSignedIn', 'currentUser', 'products']),
     // currentUser () {
     //   return this.userById(this.signedInUser.id)
     // }
@@ -148,9 +139,10 @@ export default {
         })
       }
     }
+
   },
   methods: {
-    ...mapActions(['signUserOut', 'addMessage']),
+    ...mapActions(['signUserOut', 'addMessage', 'createBike', 'editBike']),
     close () {
       this.deleteDialog = false 
       this.newDialog = false 
@@ -160,28 +152,45 @@ export default {
         this.editedIndex = -1
       }, 300)
     },
-    createBike () {
+    createBikeLocal () {
+      const len = this.products.length + 1
+      let index
+      if (len < 100) {
+        index = ('00' + len).slice(-3)
+      } else {
+        index = len
+      }
       const bikeData = {
         show: true,
         title: this.editedItem.title,
         price: this.editedItem.price,
         imageUrl: this.editedItem.imageUrl,
-        description: this.editedItem.description
+        description: this.editedItem.description,
+        quantity: this.editedItem.quantity
       }
-      this.$store.dispatch('createBike', bikeData)
+      console.log(index)
+      this.createBike({
+        bike: bikeData, 
+        index: index
+      })
       this.close()
     },
     openEditDialog (item) {
       this.editDialog = true
       this.editedItem = item
     },
-    editBike () {
-      this.$store.dispatch('editBike', {
-        id: this.editedItem.id,
+    editBikeLocal () {
+      const bikeData = {
+        show: true,
         title: this.editedItem.title,
+        quantity: this.editedItem.quantity,
         price: this.editedItem.price,
         imageUrl: this.editedItem.imageUrl,
         description: this.editedItem.description
+      }
+      this.editBike({
+        id: this.editedItem.id,
+        bike: bikeData
       })
       this.close()
     },
