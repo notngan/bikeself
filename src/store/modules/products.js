@@ -24,6 +24,16 @@ const mutations = {
     let record = state.productList.find(item => item.id == payload.id)
     Object.assign(record, payload)
     console.log(record)
+  },
+  'SET_HIDED_BIKE' (state, payload) {
+    let record = state.productList.find(item => item.id == payload.id)
+    record.show = false
+    console.log(record)
+  },
+  'SET_UNHIDED_BIKE' (state, payload) {
+    let record = state.productList.find(item => item.id == payload.id)
+    record.show = true
+    console.log(record)
   }
 }
 

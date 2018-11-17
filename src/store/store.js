@@ -167,6 +167,28 @@ export default new Vuex.Store({
       })
     },
 
+    deleteBike ({commit}, payload) {
+      const object = {}
+      object.show = false
+      database.ref('bikes').child(payload.id).update(object).then(() => {
+        commit('SET_HIDED_BIKE', payload)
+        console.log(payload)
+      }).catch(error => {
+        console.log(error)
+      })
+    },
+
+    unhideBike ({commit}, payload) {
+      const object = {}
+      object.show = true
+      database.ref('bikes').child(payload.id).update(object).then(() => {
+        commit('SET_UNHIDED_BIKE', payload)
+        console.log(payload)
+      }).catch(error => {
+        console.log(error)
+      })
+    },
+
     //BOOKINGS
     loadCountryList ({commit}) {
       axios.get('https://restcountries.eu/rest/v1/all')
