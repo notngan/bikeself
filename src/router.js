@@ -52,13 +52,20 @@ const router = new Router({
       component: () => import('./views/admin/Index'),
       meta: {
         requiresAuth: true,
-        adminAuth: true
       }
     },
     {
       path: '/admin/login',
       name: 'adminLogin',
       component: () => import('./views/admin/LogIn')
+    },
+    {
+      path: '/admin/tours',
+      name: 'adminTours',
+      component: () => import('./views/admin/Tours'),
+      meta: {
+        requiresAuth: true,
+      }
     },
     {
       path: '/booking/:id',

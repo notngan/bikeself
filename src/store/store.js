@@ -149,7 +149,7 @@ export default new Vuex.Store({
           ...payload.bike,
           id: payload.index
         })
-        console.log(payload.bike)
+        //console.log(payload.bike)
       }).catch((error) => {
         console.log(error)
       })
@@ -161,7 +161,7 @@ export default new Vuex.Store({
           ...payload.bike, 
           id: payload.id
         })
-        console.log(payload.bike)
+        //console.log(payload.bike)
       }).catch(error => {
         console.log(error)
       })
@@ -172,7 +172,7 @@ export default new Vuex.Store({
       object.show = false
       database.ref('bikes').child(payload.id).update(object).then(() => {
         commit('SET_HIDED_BIKE', payload)
-        console.log(payload)
+        //console.log(payload)
       }).catch(error => {
         console.log(error)
       })
@@ -183,7 +183,7 @@ export default new Vuex.Store({
       object.show = true
       database.ref('bikes').child(payload.id).update(object).then(() => {
         commit('SET_UNHIDED_BIKE', payload)
-        console.log(payload)
+        //console.log(payload)
       }).catch(error => {
         console.log(error)
       })
@@ -207,7 +207,7 @@ export default new Vuex.Store({
           ...payload.booking, 
           id: key
         })
-        console.log(payload.booking)
+        //console.log(payload.booking)
       }).catch((error) => {
         console.log(error)
       })
@@ -286,213 +286,4 @@ export default new Vuex.Store({
     },
   }
 })
-  
-  // mutations: {
-  //   setSignedInUser (state, payload) {
-  //     state.signedInUser = payload
-  //   },
-  //   setSignedUpUser (state, payload) {
-  //     state.signedUpUser = payload
-  //   },
-  //   setCreatedAdmin (state, payload) {
-  //     state.admins = payload
-  //   },
-  //   setLoadedBikes (state, payload) {
-  //     state.allBikes = payload
-  //   },
-  //   setCreatedBike (state, payload) {
-  //     state.allBikes.push(payload)
-  //   },
-  //   setEditedBike (state, payload) {
-  //     const bike = state.allBikes.find(bike => {
-  //       return bike.id === payload.id
-  //     })
-  //     if (payload.title) {
-  //       bike.title = payload.title
-  //     }
-  //     if (payload.description) {
-  //       bike.description = payload.description
-  //     }
-  //     if (payload.date) {
-  //       bike.price = payload.price
-  //     }
-  //     if (payload.imageUrl) {
-  //       bike.imageUrl = payload.imageUrl
-  //     }
-  //   },
-  //   setDeletedBike (state, payload) {
-  //     const bike = state.allBikeas.find(bike => {
-  //       return bike.id === payload.id
-  //     })
-  //     bike.show = payload.show
-  //   },
-  //   setAdmin (state, payload) {
-  //     state.admin = payload
-  //   },
-  //   setError (state, payload) {
-  //     state.error = payload.message
-  //   },
-  //   clearError (state) {
-  //     state.error = null
-  //   },
-  //   // setSuccess (state, payload) {
-  //   //   state.success = payload
-  //   // }
-  // },
-  // actions: {
-  //   loadBikes({commit}) {
-  //     firebase.database().ref('bikes').once('value')
-  //       .then((data) => {
-  //         const bikes = []
-  //         const obj = data.val()
-  //         for (let key in obj) {
-  //           bikes.push({
-  //             id: key,
-  //             show: obj[key].show,
-  //             title: obj[key].title,
-  //             price: obj[key].price,
-  //             imageUrl: obj[key].imageUrl,
-  //             description: obj[key].description
-  //           })
-  //         }
-  //         commit('setLoadedBikes', bikes)
-  //       })
-  //       .catch((error) => {
-  //         console.log(error)
-  //       })
-  //   },
-
-  //   editBike ({commit}, payload) {
-  //     const editObj = {}
-  //     if(payload.title) {
-  //       editObj.title = payload.title
-  //     }
-  //     if(payload.price) {
-  //       editObj.price = payload.price
-  //     }
-  //     if(payload.imageUrl) {
-  //       editObj.imageUrl = payload.imageUrl
-  //     }
-  //     if(payload.description) {
-  //       editObj.description = payload.description
-  //     }
-  //     firebase.database().ref('bikes').child(payload.id).update(editObj)
-  //       .then(() => {
-  //         commit('setEditedBike', payload)
-  //       })
-  //       .catch(error => {
-  //         console.log(error)
-  //       })
-  //   },
-  
-  //   logAdminIn ({commit}, payload) {
-  //     commit('clearError')
-  //     firebase.auth().signInWithEmailAndPassword(payload.email, payload.password)
-  //       .then(admin => {
-  //         const newAdmin = {
-  //           id: admin.uid
-  //         }
-  //         commit('setAdmin', newAdmin)
-  //       })
-  //       .catch(error => {
-  //         commit('setError', error)
-  //       })
-  //   },
-
-  //   logAdminOut ({commit}) {
-  //     firebase.auth().signOut()
-  //     commit('setAdmin', null)
-  //   },
-  //   // signUserOut ({commit}) {
-  //   //   firebase.auth().signOut()
-  //   //   commit('setSignedInUser', null)
-  //   //   console.log('signed out')
-  //   // },
-  //   signUserUp ({commit}, payload) {
-  //     commit('clearError')
-  //     firebase.auth().createUserWithEmailAndPassword(payload.email, payload.password)
-  //     .then(data => {
-  //       const foo = {
-  //         id: data.user.uid,
-  //         email: data.user.email,
-  //         bookings: []
-  //       }
-  //       console.log(foo)
-
-  //       data.user.updateProfile({
-  //         displayName: payload.name
-  //       }).then(() => {
-  //         const newUser = {
-  //           ...foo,
-  //           name: data.user.displayName
-  //         }
-  //         commit('setSignedUpUser', newUser)
-  //         console.log(newUser)
-
-  //       }).catch(error => {
-  //         console.log(error)
-  //       })
-  //     })
-  //     .catch(error => {
-  //       commit('setError', error)
-  //       console.log(error)
-  //     })
-  //   },
-  //   signUserIn ({commit}, payload) {
-  //     commit('clearError')
-  //     firebase.auth().signInWithEmailAndPassword(payload.email, payload.password)
-  //       .then(data => {
-  //         const newUser = {
-  //           id: data.user.uid,
-  //           email: data.user.email,
-  //           name: data.user.displayName,
-  //           bookings: []
-  //         }
-  //         commit('setSignedInUser', newUser)
-  //         //console.log(newUser)
-  //       })
-  //       .catch(error => {
-  //         commit('setError', error)
-  //       })
-  //   },
-  //   clearError ({commit}) {
-  //     commit('clearError')
-  //   },
-  //   autoSignIn ({commit}, payload) {
-  //     commit('setSignedInUser', {id: payload.uid, email: payload.email, name: payload.displayName, bookings: [] })
-  //   },
-  // },
-  // getters: {
-  //   bikeById (state) {
-  //     return (bikeId) => {
-  //       return state.allBikes.find((bike) => {
-  //         return bike.id === bikeId
-  //       })
-  //     }
-  //   },
-  //   slicedTours (state) {
-  //     return state.allTours.slice(0,3);
-  //   },
-  //   admin (state) {
-  //     return state.admin
-  //   },
-  //   adminIsAuthenticated (getters) {
-  //     return getters.admin !== null && getters.admin !== undefined 
-  //   },
-  //   userIsAuthenticated (getters) {
-  //     return getters.signedInUser !== null && getters.signedInUser !== undefined 
-  //   },
-  //   error (state) {
-  //     return state.error
-  //   },
-  //   success (state) {
-  //     return state.success
-  //   },
-  //   signedInUser (state) {
-  //     return state.signedInUser
-  //   },
-  //   signedUpUser (state) {
-  //     return state.signedUpUser
-  //   },
-  // }
-
+ 

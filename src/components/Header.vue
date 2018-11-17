@@ -60,7 +60,7 @@
       </template>
     </v-list>
   </v-navigation-drawer>
-
+  <!-- USER -->
   <v-toolbar
     class="primary"
     fixed
@@ -100,7 +100,6 @@
         <v-spacer class="hidden-sm-and-down"></v-spacer>
       </v-layout>
     </v-container> 
-   
         
     <!-- SUB MENU -->
     <v-btn :to="'/bookings'" flat icon :color="'rgba(0,0,0,0.7)'">
@@ -159,14 +158,20 @@
   
   <!-- ADMIN -->
   <v-toolbar fixed v-if="!notAdmin" class="primary">
-    <v-btn flat icon :to="'/'"><v-icon>home</v-icon></v-btn>
-    
-    <v-toolbar-title>Admin</v-toolbar-title>
-    
-    <v-spacer></v-spacer>
-    <v-toolbar-items v-if="isAdmin == true">
-      <v-btn flat @click="signout">Sign out <v-icon>exit_to_app</v-icon></v-btn>
-    </v-toolbar-items>
+    <v-container py-2 fluid fill-height>
+      <v-layout align-center>
+        <v-btn flat icon :to="'/'"><v-icon>home</v-icon></v-btn>
+        
+        <v-toolbar-title>Admin</v-toolbar-title>
+        <v-spacer></v-spacer>
+        <v-toolbar-items v-if="isAdmin == true">
+          <v-btn exact flat small :to="'/admin'">bikes</v-btn>
+          <v-btn exact flat small :to="'/admin/tours'">tours</v-btn>
+          <v-divider class="mx-2" vertical></v-divider>
+          <v-btn small flat @click="signout">Sign out &nbsp;&nbsp; <v-icon small>exit_to_app</v-icon></v-btn>
+        </v-toolbar-items>
+      </v-layout>
+    </v-container>
   </v-toolbar>
 </div>
 </template>
@@ -226,11 +231,11 @@ export default {
       } 
     },
     notAdmin () {
-      return this.$route.name !== 'admin' && this.$route.name !== 'adminLogin'
+      return this.$route.name !== 'admin' && this.$route.name !== 'adminLogin' && this.$route.name !== 'adminTours'
     },
     showBadge () {
       if (this.bookings.length > 0) {
-        return true
+        return true 
       } else {
         return false
       }

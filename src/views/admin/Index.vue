@@ -1,5 +1,5 @@
 <template>
-<v-container v-if="isSignedIn" my-0 py-0 fluid fill-height>
+<v-container class="wrapper" v-if="isSignedIn" my-0 py-0 fluid>
   <v-layout column justify-center>
     <v-toolbar flat>
       <v-toolbar-title>All Items</v-toolbar-title>
@@ -249,3 +249,9 @@ export default {
   }
 }
 </script> 
+
+<style lang="scss" scoped>
+.wrapper {
+  min-height: 100vh;
+}
+</style>
