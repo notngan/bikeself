@@ -6,20 +6,22 @@ import { database, firebaseAuth } from '../firebaseConfig';
 
 
 import auth from './modules/auth'
-import messages from './modules/messages'
-import products from './modules/products'
+import message from './modules/message'
+import product from './modules/product'
 import booking from './modules/booking'
 import admin from './modules/admin'
+import tour from './modules/tour'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   modules: {
     auth,
-    messages,
-    products,
+    message,
+    product,
     booking,
-    admin
+    admin,
+    tour
   },
   actions: {
     // AUTH
@@ -185,6 +187,41 @@ export default new Vuex.Store({
         commit('SET_UNHIDED_BIKE', payload)
         //console.log(payload)
       }).catch(error => {
+        console.log(error)
+      })
+    },
+
+    // TOURS
+    createArticle ({commit}, payload) {
+      database.ref('tours').push(payload).then((data) => {
+        const key = data.key
+        commit('SET_CREATED_ARTICLE', {
+          id: key,
+          ...payload 
+        })
+        console.log(payload)
+      }).catch((error) => {
+        console.log(error)
+      })
+    },
+
+    loadArticleList ({commit}) {
+      database.ref('tours').once('value').then((data) => {
+        const tours = []
+        const object = data.val()
+        for (let key in object) {
+          tours.push({
+            id: key,
+            title: object[key].title,
+            author: object[key].author,
+            description: object[key].description, 
+            image: object[key].image,
+            sections: object[key].sections
+          })
+        }
+        commit('LOAD_ARTICLE_LIST', tours)
+        console.log(tours)
+      }).catch((error) => {
         console.log(error)
       })
     },

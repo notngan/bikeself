@@ -6,10 +6,9 @@
       </v-layout>
       <v-layout row wrap>
         <v-flex
-          v-for="tour in allTours"
-          v-bind="{ [`md${tour.flex}`]: true }"
-          :key="tour.title"
-        >
+          xs12 md6
+          v-for="tour in articles"
+          :key="tour.id">
           <tour-item :tour="tour"/>
         </v-flex>
       </v-layout>
@@ -18,13 +17,12 @@
 </template>
 
 <script>
-import TourItem from '.././components/tour/TourItem.vue'
+import { mapGetters } from 'vuex'
+import TourItem from '../components/tour/TourItem'
 export default {
   components: { TourItem },
   computed: {
-    allTours () {
-      return this.$store.state.allTours
-    }
+    ...mapGetters(['articles'])
   }
 }
 </script>

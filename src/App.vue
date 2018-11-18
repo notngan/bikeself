@@ -52,11 +52,20 @@ export default {
   }, 
 
   methods: {
-    ...mapActions(['addMessage','loadUserList','loadProductList', 'loadTransactionList', 'loadCountryList', 'loadBookingList'])
+    ...mapActions([
+      'addMessage',
+      'loadArticleList',
+      'loadUserList',
+      'loadProductList', 
+      'loadTransactionList', 
+      'loadCountryList', 
+      'loadBookingList'
+    ])
   },
 
   created () {
     this.loadUserList()
+    this.loadArticleList()
     this.loadProductList()
     this.loadCountryList()
     this.loadBookingList(this.signedInUser.id)

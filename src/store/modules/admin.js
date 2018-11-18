@@ -2,7 +2,7 @@
 
 const state = {
 	userList: [],
-	isAdmin: false
+	isAdmin: false,
 
 }
 
@@ -13,7 +13,8 @@ const mutations = {
 
 	'SET_ADMIN' (state, payload) {
 		state.isAdmin = payload
-	}
+	},
+
 }
 
 const actions = {
@@ -27,6 +28,7 @@ const getters = {
 	users (state) {
 		return state.userList
 	},
+
 	currentUser (state, getters) {
 		return state.userList.find((user) => {
 			return (user.id === getters.signedInUser.id)

@@ -6,29 +6,18 @@
       >
       </v-img>
 
-      <v-container
-        fill-height
-        fluid
-        pa-3
-      >
-        <v-layout fill-height align-center>
-          <v-flex xs12 flexbox>
-            <span class="title text-uppercase" v-text="tour.title"></span>
-            <p class="body-1"> {{ tour.description }}</p>
-          </v-flex>
-          
-          <v-flex>
-            <v-card-actions>
-              <v-btn large icon>
-                <v-icon>info</v-icon>
-              </v-btn>
-              <v-btn large icon>
-                <v-icon>bookmark</v-icon>
-              </v-btn>
-            </v-card-actions>
-          </v-flex>
-        </v-layout>
-      </v-container>
+      <v-layout align-center>
+        <v-flex xs12>
+          <v-card-title primary-title>
+            <div>
+                <h2 class="headline font-weight-bold text-capitalize mt-0">
+                  <router-link :to="'tours/' + tour.id">{{ tour.title }}</router-link>
+                </h2>
+              <div>{{ tour.description }}</div>
+            </div>
+          </v-card-title> 
+        </v-flex>
+      </v-layout>
 
       <v-divider></v-divider>
      
@@ -42,5 +31,8 @@ export default {
 </script>
 
 <style lang="scss">
+  a {
+    text-decoration: none;
+  }
 </style>
 
