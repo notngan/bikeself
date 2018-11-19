@@ -2,7 +2,8 @@
 
 const state = {
 	
-	articleList: []
+	articleList: [],
+
 
 }
 
@@ -12,7 +13,8 @@ const mutations = {
   },
   'LOAD_ARTICLE_LIST' (state, payload) {
     state.articleList = payload
-  }
+	},
+
 }
 
 const actions = {
@@ -23,7 +25,7 @@ const getters = {
 	articles (state) {
 		return state.articleList
 	},
-	
+
 	tourById (state) {
     return (id) => {
       return state.articleList.find((tour) => {

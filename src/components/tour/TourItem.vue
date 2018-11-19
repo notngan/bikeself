@@ -1,27 +1,24 @@
 <template>
-   <v-card flat>
-      <v-img
-        :src="tour.image"
-        height="200px"
-      >
-      </v-img>
+  <v-card flat tile hover>
+    <v-img
+      :src="tour.image"
+      height="200px"
+    >
+    </v-img>
 
-      <v-layout align-center>
-        <v-flex xs12>
-          <v-card-title primary-title>
-            <div>
-                <h2 class="headline font-weight-bold text-capitalize mt-0">
-                  <router-link :to="'tours/' + tour.id">{{ tour.title }}</router-link>
-                </h2>
-              <div>{{ tour.description }}</div>
-            </div>
-          </v-card-title> 
-        </v-flex>
-      </v-layout>
+    <v-card-title primary-title>
+      <div>
+        <h2 class="headline font-weight-bold text-capitalize mt-0">
+          <router-link :to="'tours/' + tour.id">{{ tour.title }}</router-link>
+        </h2>
+        <div>{{ tour.description.substring(0,120) }}...</div>
+        <div class="mt-2 text-xs-right grey--text caption">{{tour.author}},&nbsp; {{tour.date}}</div>
+      </div>
+    </v-card-title>
 
-      <v-divider></v-divider>
-     
-    </v-card>
+
+    <v-divider></v-divider>
+  </v-card>
 </template>
 
 <script>

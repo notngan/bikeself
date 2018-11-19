@@ -154,6 +154,7 @@ export default {
     onCreateArticle () {
       if (this.$refs.form.validate()) {
         this.article.author = this.signedInUser.name
+        this.article.date = new Date().toISOString().substring(0,10)
         this.createArticle(this.article).then(() => {
           this.newForm = false
           this.addMessage({

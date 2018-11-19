@@ -2,9 +2,9 @@
   <div class="home">
 
     <v-content>
-
       <home-banner/>
 
+      <!-- BIKES -->
       <section id="home-popular">
         <v-container grid-list-lg>
           <v-layout align-center fill-height justify-space-between>
@@ -15,7 +15,7 @@
           </v-layout>
           <v-layout mt-3 wrap>
             <v-flex 
-              v-for="bike in popularBikes"
+              v-for="bike in products"
               :key="bike.id"
               mb-1
               xs12 sm6 md4 lg3>
@@ -25,6 +25,7 @@
         </v-container>
       </section>
 
+      <!-- SERVICES -->
       <section id="home-services">
         <v-container grid-list-lg>
           <v-layout>
@@ -43,6 +44,7 @@
         </v-container>
       </section>
       
+      <!-- TOURS -->
       <section id="home-tours">
         <v-container grid-list-lg>
           <v-layout mb-3 align-center fill-height justify-space-between>
@@ -53,8 +55,7 @@
           </v-layout>
           <v-layout row wrap>
             <v-flex
-              v-for="tour in slicedTours"
-              v-bind="{ [`md${tour.flex}`]: true }"
+              v-for="tour in articles"
               :key="tour.title"
             >
               <tour-item :tour="tour"/>
@@ -71,19 +72,39 @@ import BikeItem from '.././components/bike/BikeItem.vue'
 import ServiceItem from '../components/service/ServiceItem.vue'
 import TourItem from '.././components/tour/TourItem.vue'
 import HomeBanner from '.././components/HomeBanner.vue'
-
+import { mapGetters } from 'vuex'
 export default {
   components: { HomeBanner, BikeItem, ServiceItem, TourItem },
-  computed: {
-    popularBikes () {
-      return this.$store.getters.products
-    },
-    services () {
-      return this.$store.state.allServices
-    },
-    slicedTours () {
-      return this.$store.getters.slicedTours
+  data () { 
+    return {
+      services: [
+        {
+          icon: 'place',
+          title: 'Delivery & pickup',
+          description: 'Recieve and return the bike at your place.'
+        },
+        {
+          icon: 'build',
+          title: 'repair & maintain',
+          description: 'Free repair and maintain along the whole trip.'
+        },
+        {
+          icon: 'phone',
+          title: '24/24 support',
+          description: 'Hotline is always available.'
+        },
+        {
+          icon: 'extension',
+          title: 'Accessories',
+          description: 'Raincoat, Helmet and Lock are provided for free.'
+        },
+        
+      ]
     }
+  },
+  computed: {
+    ...mapGetters(['products',  'articles'])
+   
   }
 }
 </script>

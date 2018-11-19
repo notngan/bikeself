@@ -1,6 +1,6 @@
 <template>
   <div>
-  <v-card tile flat>
+  <v-card hover tile flat>
     <v-img :height="'200px'" :src="bike.imageUrl"></v-img>
     <v-card-title>
       <v-layout fill-height justify-space-between>
@@ -17,13 +17,13 @@
 
 
     <v-card-actions>
-      <v-layout wrap align-center justify-end>
-        <v-flex xs12 sm6>
+      <v-layout px-2 wrap align-center justify-end>
+        <v-flex px-1 my-2 xs12 sm6>
           <v-btn :to="'/rentals/'+ bike.id" depressed small block>
             View details
           </v-btn>
         </v-flex>
-        <v-flex xs12 sm6>
+        <v-flex px-1 my-2 xs12 sm6>
           <v-btn @click="book" small depressed color="amber" block>
             Book now
           </v-btn>

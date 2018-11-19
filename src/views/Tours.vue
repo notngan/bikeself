@@ -1,12 +1,18 @@
 <template>
-  <div class="tours">
-    <v-container grid-list-lg>
-      <v-layout mb-3>
-        <h2 class="font-weight-bold display-1">Self-guided Tours</h2>
+  <div class="wrapper">
+    <v-parallax height="350" src="http://www.thelostpassport.com/wp-content/uploads/2017/05/Ultimate-Vietnam-Motorbike-Itinerary.jpg" alt="Motorbike Rental Vietnam">
+      <v-layout
+      align-center
+      column
+      justify-center>
+        <h1 class="bigtext">Self-guided Tours</h1>
       </v-layout>
+    </v-parallax>
+    <v-divider class="mt-4"></v-divider>
+    <v-container>
       <v-layout row wrap>
         <v-flex
-          xs12 md6
+          xs12 sm6
           v-for="tour in articles"
           :key="tour.id">
           <tour-item :tour="tour"/>
@@ -26,3 +32,13 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.wrapper {
+  min-height: 100vh;
+}
+.bigtext {
+  font-size: 10vw;
+}
+</style>
+

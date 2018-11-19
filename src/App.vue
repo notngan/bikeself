@@ -59,7 +59,7 @@ export default {
       'loadProductList', 
       'loadTransactionList', 
       'loadCountryList', 
-      'loadBookingList'
+      'loadBookingList',
     ])
   },
 
@@ -80,5 +80,8 @@ export default {
 }
 .heading {
   color: rgba(0,0,0,0.5);
+}
+.wrapper {
+  min-height: 100vh;
 }
 </style>

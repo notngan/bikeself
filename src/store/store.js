@@ -10,7 +10,7 @@ import message from './modules/message'
 import product from './modules/product'
 import booking from './modules/booking'
 import admin from './modules/admin'
-import tour from './modules/tour'
+import service from './modules/service'
 
 Vue.use(Vuex)
 
@@ -21,7 +21,7 @@ export default new Vuex.Store({
     product,
     booking,
     admin,
-    tour
+    service
   },
   actions: {
     // AUTH
@@ -214,6 +214,7 @@ export default new Vuex.Store({
             id: key,
             title: object[key].title,
             author: object[key].author,
+            date: object[key].date,
             description: object[key].description, 
             image: object[key].image,
             sections: object[key].sections
