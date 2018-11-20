@@ -1,41 +1,37 @@
 <template>
- <footer>
-   <v-container fill-height>
-     <v-layout my-0 py-0 justify-space-between wrap class="text-xs-center text-sm-left">
-       <v-flex xs12 sm7 offset-sm1 offset-md0 md6 lg8 my-2>
-         <h3>bikeself's office</h3>
-         <v-layout wrap>
-           <v-flex xs12 lg6>
-             <h4>da nang</h4>
-             <p>215 Ngo Quyen Street, Ward 22, Hai Trieu District.</p>
-             <p>215 An Duong Vuong Street, Ward 2, Thanh Khe District.</p>
-           </v-flex>
-           <v-flex xs12 lg6>
-             <h4>hue</h4>
-             <p>215 Ngo Quyen Street, Ward 22, Hai Trieu District.</p>
-             <p>215 An Duong Vuong Street, Ward 2, Thanh Khe District.</p>
-           </v-flex>
-         </v-layout>
-       </v-flex>
-      
-       <v-flex xs12 sm4 md6 lg4 my-2>
-         <v-layout wrap>
-           <v-flex xs12 md6>
-            <h3>hotline</h3>
-            <p>1900 1910</p>
-            <p>(+84) 909 191 053</p>
-           </v-flex>
+  <div>
+    <footer>
+      <v-container fill-height>
+        <v-layout my-0 py-0 justify-center wrap class="text-xs-center text-sm-left">
+          <v-flex xs12 sm7 offset-sm1 offset-md1 md5 lg6 my-2>
+              <h3>bikeself's office</h3>
+              <p>215 Ngo Quyen, Ward 22, Hai Trieu, Da Nang.</p>
+              <p>55 Le Thanh Tai, Ward 12, Vi Da, Hue.</p>
+              <p>11 Tran Thu Thao, Ward 2, Cam Nam, Hoi An.</p>
+          </v-flex>
+          
+          <v-flex xs12 sm4 md6 lg5 mt-2>
+            <v-layout wrap>
+              <v-flex xs12 md6>
+                <h3>hotline</h3>
+                <p>1900 1910</p>
+                <p>(+84) 909 191 053</p>
+              </v-flex>
 
-           <v-flex xs12 md6>
-            <h3>social networks</h3>
-            <p><a href="https://facebook.com" target="blank">Facebook</a></p>
-            <p><a href="https://youtube.com" target="blank">YouTube</a></p>
-           </v-flex>
-         </v-layout>
-       </v-flex>
-     </v-layout>
-   </v-container>
- </footer>
+              <v-flex xs12 md6>
+                <h3>social networks</h3>
+                <p><a href="https://facebook.com" target="blank">Facebook</a></p>
+                <p><a href="https://youtube.com" target="blank">YouTube</a></p>
+              </v-flex>
+            </v-layout>
+          </v-flex>
+        </v-layout>
+      </v-container>
+    </footer>
+    <div class="copyright">
+      <v-icon small color="grey lighten-1">copyright</v-icon> 2018 BikeSelf Rental Company. All Rights Reserved.
+    </div>
+  </div>
 </template>
 
 <script>
@@ -67,5 +63,13 @@ export default {
     font-size: 0.95rem;
     text-transform: capitalize;
     color: #E0E0E0;
+  }
+  .copyright {
+    background: black;
+    color: #aaa;
+    display: block;
+    font-size: 0.8em;
+    padding: 2px 0;
+    text-align: center;
   }
 </style>

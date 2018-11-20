@@ -1,10 +1,10 @@
 <template>
   <div class="wrapper">
     <v-container>
-      <v-layout wrap justify-space-between>
+      <v-layout wrap justify-center>
 
-        <v-flex xs12 sm7>
-        <h1 class="font-weight-bold mb-4 display-2">How can we help you<span>, {{ name }}</span>?</h1>
+        <v-flex xs12 sm6 offset-sm1>
+          <h1 class="font-weight-bold mb-4 display-2">How can we help you<span v-if="name !== null">, {{ name }}</span>?</h1>
           <v-form>
             <v-select
               :items="helps"
@@ -25,9 +25,10 @@
             </v-textarea>
           </v-form>
         </v-flex>
-
-        <v-flex xs12 sm4>
-          <v-layout column>
+ 
+        <v-flex xs12 sm4 offset-sm1>
+          <v-layout class="text-xs-center text-sm-left" column>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3833.571439224269!2d108.23949331428636!3d16.087713888869537!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x314217f45884e355%3A0x69e1e76645deb553!2zMjE1IE5nw7QgUXV54buBbiwgTcOibiBUaMOhaSwgU8ahbiBUcsOgLCDEkMOgIE7hurVuZywgVmlldG5hbQ!5e0!3m2!1sen!2s!4v1542710097876" frameborder="0" style="border:0" allowfullscreen></iframe>
             <v-flex mb-3>
               <h2>Hotline</h2>
               <div>1900 1910</div>
