@@ -1,8 +1,16 @@
 <template>
   <div v-if="services" class="wrapper">
+     <v-parallax height="350" src="https://stingynomads.com/wp-content/uploads/2016/11/cr2.jpg" alt="Motorbike Rental Vietnam">
+      <v-layout
+      align-center
+      column
+      justify-center>
+        <h1 class="bigtext">Free Services</h1>
+      </v-layout>
+    </v-parallax>
+    <v-divider class="mt-4"></v-divider>
     <v-container>
-      <h2 class="font-weight-bold text-capitalize display-1">Free Services</h2>
-      <v-layout wrap justify-center mt-3>
+      <v-layout wrap justify-center>
         <v-flex
           pa-2
           xs12 sm6
@@ -50,4 +58,11 @@ export default {
   
 } 
 </script>
+
+<style lang="scss" scoped>
+.bigtext {
+  font-size: 10vw;
+}
+</style>
+
 

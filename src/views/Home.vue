@@ -53,8 +53,9 @@
               <v-icon small>keyboard_arrow_right</v-icon>
             </v-btn>
           </v-layout>
-          <v-layout row wrap>
+          <v-layout wrap>
             <v-flex
+              xs12 sm6
               v-for="tour in articles"
               :key="tour.title"
             >
