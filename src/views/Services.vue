@@ -1,6 +1,6 @@
 <template>
   <div v-if="services" class="wrapper">
-     <v-parallax height="350" src="https://stingynomads.com/wp-content/uploads/2016/11/cr2.jpg" alt="Motorbike Rental Vietnam">
+     <v-parallax src="https://stingynomads.com/wp-content/uploads/2016/11/cr2.jpg" alt="Motorbike Rental Vietnam">
       <v-layout
       align-center
       column
