@@ -2,7 +2,7 @@
   <div class="home-banner">
     <v-parallax src="https://vietnammotorbiketour.asia/wp-content/uploads/2015/11/north-vietnam-motorbike-tours2.jpg" alt="Vietnam Rental Bikes">
       <v-layout align-center justify-center>
-        <v-flex xs12 sm8 md6>
+        <v-flex xs12 sm8 md6 class="wrap">
           <v-autocomplete
             outline
             v-model="keyword"
@@ -15,7 +15,6 @@
             label="Search for bike..."
             persistent-hint
             append-icon="toys">
-
           </v-autocomplete> 
         </v-flex>
       </v-layout>
@@ -65,5 +64,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+  .wrap {
+    background-image: radial-gradient(closest-side, rgba(#fff,0.5), rgba(0,0,0,0));
+    padding: 30px 30px 10px;
+  }
 </style>

@@ -31,9 +31,8 @@ const router = new Router({
       name: 'bikeDetail',
       component: () => import('./components/bike/BikeDetail'),
       meta: {
-        title: 'Bike Details'
+        title: 'Bike Details' 
       }
-      //props: true
     },
     {
       path: '/services',

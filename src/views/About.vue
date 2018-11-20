@@ -1,8 +1,7 @@
 <template>
   <div class="wrapper">
+    <!-- STORY -->
     <v-container>
-
-      <!-- BIKESELF -->
       <v-layout justify-center mb-4>
         <v-flex xs12 sm8 class="text-xs-center">
           <v-divider class="mb-4"></v-divider>
@@ -14,10 +13,9 @@
           <p> Chase after silly colored fish toys around the house. Disappear for four days and return home with an expensive injury; bite the vet make plans to dominate world and then take a nap scratch the box purr while eating and stare at guinea pigs so this human feeds me, i should be a god or i'm going to lap some water out of my master's cup meow. I like fish. Lay on arms while you're using the keyboard bring your owner a dead bird. Destroy the blinds cat meoooow i iz master of hoomaan, not hoomaan master of i, oooh damn dat dog. Roll on the floor purring your whiskers off paw at beetle and eat it before it gets away for always hungry and sit on human and hide from vacuum cleaner yet stand in front of the computer screen leave hair everywhere.</p>
         </v-flex>
       </v-layout>
-
-      
     </v-container>
 
+    <!-- TEAM -->
     <v-layout class="accent" column>
       <v-container>
         <v-layout justify-center>
@@ -38,6 +36,7 @@
       </v-layout>
     </v-layout>
 
+    <!-- GUARANTEE -->
     <v-container>
       <v-layout justify-center mb-4>
         <v-flex xs12 sm8 class="text-xs-center">

@@ -29,7 +29,7 @@
       </v-container>
     </footer>
     <div class="copyright">
-      <v-icon small color="grey lighten-1">copyright</v-icon> 2018 BikeSelf Rental Company. All Rights Reserved.
+      <v-icon small color="grey lighten-1">copyright</v-icon> 2018 BikeSelf. All Rights Reserved.
     </div>
   </div>
 </template>

@@ -18,12 +18,12 @@
 
     <v-card-actions>
       <v-layout px-2 wrap align-center justify-end>
-        <v-flex px-1 my-2 xs12 sm6>
+        <v-flex px-1 mb-1 xs12 sm6>
           <v-btn :to="'/rentals/'+ bike.id" depressed small block>
             View details
           </v-btn>
         </v-flex>
-        <v-flex px-1 my-2 xs12 sm6>
+        <v-flex px-1 xs12 sm6>
           <v-btn @click="book" small depressed color="amber" block>
             Book now
           </v-btn>

@@ -8,9 +8,14 @@
           <v-avatar>
             <img :src="bike.imageUrl">
           </v-avatar>
-          <v-toolbar-title>{{ bike.title }}</v-toolbar-title>
-          <v-divider class="ml-3" vertical></v-divider>
-          <v-toolbar-title class="caption">
+          
+          <v-toolbar-title>
+            {{ bike.title }}
+          </v-toolbar-title>
+          
+          <v-divider class="ml-3 hidden-xs-only" vertical></v-divider>
+          
+          <v-toolbar-title class="hidden-xs-only caption">
              {{ booking.quantity }} bike(s), &nbsp;
              {{ booking.dayNumber }} day(s)
           </v-toolbar-title>
@@ -55,9 +60,13 @@
         <v-card-title>
           <v-layout align-center wrap justify-end>
             <v-flex xs4 sm3 md2>
+              <div class="caption hidden-sm-and-up">
+                {{ booking.quantity }} bike(s) <br>
+                {{ booking.dayNumber }} day(s)
+              </div>
               <h4 class="font-weight-bold text-uppercase">Sub total: ${{ booking.quantity * booking.dayNumber * bike.price }}</h4>
             </v-flex>
-            <v-flex xs8 sm3>
+            <v-flex xs7 offset-xs1 offset-sm0 sm4>
               <v-btn @click="checkout" color="amber" block>check out</v-btn>
             </v-flex>
           </v-layout>

@@ -72,7 +72,7 @@
       class="hidden-md-and-up">
     </v-toolbar-side-icon>
     
-    <v-container py-2 fluid fill-height>
+    <v-container py-2 px-0 mx-0 fill-height>
       <v-layout px-0 mx-0 justify-space-between wrap align-center>
         
         <v-spacer class="hidden-md-and-up"></v-spacer>
@@ -102,7 +102,7 @@
     </v-container> 
         
     <!-- SUB MENU -->
-    <v-btn :to="'/bookings'" flat icon :color="'rgba(0,0,0,0.7)'">
+    <v-btn :to="'/bookings'" class="hidden-sm-and-down" flat icon :color="'rgba(0,0,0,0.7)'">
       <v-badge
         color="red"
         overlap
@@ -118,6 +118,7 @@
       
       <v-list>
         <!-- INFO -->
+    
         <v-list-tile :to="'/user/' + signedInUser.id" v-if="isSignedIn">
           <v-list-tile-content>View profile</v-list-tile-content>
           <v-list-tile-action><v-icon>info</v-icon></v-list-tile-action>
@@ -153,7 +154,17 @@
         </v-list-tile>
       </v-list>
     </v-menu>
-       
+
+    <v-btn :to="'/bookings'" class="hidden-md-and-up" flat icon :color="'rgba(0,0,0,0.7)'">
+      <v-badge
+        color="red"
+        overlap
+        v-model="showBadge"
+        >
+        <span slot="badge">{{ bookings.length }}</span>
+          <v-icon>bookmark</v-icon>
+      </v-badge>
+    </v-btn> 
   </v-toolbar>
   
   <!-- ADMIN -->
