@@ -1,6 +1,6 @@
 # BikeSelf
 
-BikeSelf is a motorbike rental service for foreigners in Vietnam.
+BikeSelf is my college project which's about a motorbike rental service for foreigners in Vietnam.
 
 https://bikeself.asia
 
