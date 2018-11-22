@@ -1,4 +1,6 @@
-# bikeself
+# BikeSelf
+
+BikeSelf is a motorbike rental service for foreigners in Vietnam. It's my final project in college.
 
 ## Project setup
 ```
