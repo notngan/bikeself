@@ -2,9 +2,9 @@
 
 BikeSelf is my college project which's about a motorbike rental service for foreigners in Vietnam.
 
-https://bikeself.asia
+https://notngan.github.io/
 
-Admin panel at https://bikeself.asia/admin
+Admin panel at https://notngan.github.io/admin
 
 Admin login with `admin@gmail.com`, password: `notngan` 
 
